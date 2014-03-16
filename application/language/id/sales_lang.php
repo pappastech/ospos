@@ -81,4 +81,5 @@ $lang ['sales_payments_total'] = 'Payments Total';
 $lang ['sales_amount_due'] = 'Amount Due';
 $lang ['sales_payment_type'] = "Type";
 $lang ['sales_payment_amount'] = "Amount";
+$lang ['sales_basic_information'] = "Sale information";
 ?>
