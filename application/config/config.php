@@ -82,7 +82,10 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+/* SAS */
+// $config['language']	= 'english';
+$config['language']	= 'en';
+/* EAS */
 
 /*
 |--------------------------------------------------------------------------
