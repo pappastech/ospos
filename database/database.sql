@@ -31,7 +31,7 @@ INSERT INTO `ospos_app_config` (`key`, `value`) VALUES
 ('address', '123 Nowhere street'),
 ('company', 'Open Source Point of Sale'),
 ('default_tax_rate', '8'),
-('email', 'admin@pappastech.com'),
+('email', 'changeme@dontbeamoron.com'),
 ('fax', ''),
 ('phone', '555-555-5555'),
 ('return_policy', 'Test'),
