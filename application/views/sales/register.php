@@ -41,7 +41,12 @@ else
 }
 ?>
 </label>
-<?php echo form_input(array('name'=>'item','id'=>'item','size'=>'40'));?>
+<?php
+// SAS
+//echo form_input(array('name'=>'item','id'=>'item','size'=>'40'));
+echo form_input(array('name'=>'item','id'=>'item','size'=>'40','tabindex'=>'1'));
+// EAS
+?>
 <div id="new_item_button_register" >
 		<?php echo anchor("items/view/-1/width:360",
 		"<div class='small_button'><span>".$this->lang->line('sales_new_item')."</span></div>",
@@ -75,8 +80,18 @@ if(count($cart)==0)
 }
 else
 {
+	// SAS
+	//$tabindex = count($cart) + 1;
+	$tabindex = 2;
+	// EAS
 	foreach(array_reverse($cart, true) as $line=>$item)
 	{
+		// SAS
+		if($tabindex == 3) 
+		{
+			$tabindex = 5;
+		}
+		// EAS
 		$cur_item_info = $this->Item->get_info($item['item_id']);
 		echo form_open("sales/edit_item/$line");
 	?>
@@ -110,8 +125,11 @@ else
         		echo form_hidden('quantity',$item['quantity']);
         	}
         	else
-        	{
-        		echo form_input(array('name'=>'quantity','value'=>$item['quantity'],'size'=>'2'));
+        	{        		
+        		// SAS
+				//echo form_input(array('name'=>'quantity','value'=>$item['quantity'],'size'=>'2'));
+        		echo form_input(array('name'=>'quantity','value'=>$item['quantity'],'size'=>'2','tabindex'=>$tabindex));
+        		// EAS
         	}
 		?>
 		</td>
@@ -172,6 +190,9 @@ else
 		<td colspan=8 style="background-color:white"> </td>
 		</tr>		</form>
 	<?php
+	// SAS
+	$tabindex = $tabindex + 1;
+	// EAS
 	}
 }
 ?>
@@ -259,8 +280,15 @@ else
 				}
 				 
 				if ($payments_cover_total)
-				{
-					echo "<div class='small_button' id='finish_sale_button' style='float:left;margin-top:5px;'><span>".$this->lang->line('sales_complete_sale')."</span></div>";
+				{					
+					// SAS
+					//echo "<div class='small_button' id='finish_sale_button' style='float:left;margin-top:5px;'><span>".$this->lang->line('sales_complete_sale')."</span></div>";
+					echo "
+						<div class='small_button' id='finish_sale_button' style='float:left;margin-top:5px;' tabindex='3'>
+							<span>".$this->lang->line('sales_complete_sale')."
+							</span>
+						</div>";						
+					// EAS
 				}
 				echo "<div class='small_button' id='suspend_sale_button' style='float:right;margin-top:5px;'><span>".$this->lang->line('sales_suspend_sale')."</span></div>";
 				?>
@@ -300,7 +328,12 @@ else
 				<span id="amount_tendered_label"><?php echo $this->lang->line( 'sales_amount_tendered' ).': '; ?></span>
 			</td>
 			<td>
-				<?php echo form_input( array( 'name'=>'amount_tendered', 'id'=>'amount_tendered', 'value'=>to_currency_no_money($amount_due), 'size'=>'10' ) );	?>
+				<?php 				
+				// SAS
+				//echo form_input( array( 'name'=>'amount_tendered', 'id'=>'amount_tendered', 'value'=>to_currency_no_money($amount_due), 'size'=>'10' ) );	
+				echo form_input( array( 'name'=>'amount_tendered', 'id'=>'amount_tendered', 'value'=>to_currency_no_money($amount_due), 'size'=>'10','tabindex'=>4 ) );	
+				// EAS
+				?>
 			</td>
 			</tr>
         	</table>
@@ -432,6 +465,22 @@ $(document).ready(function()
     		$('#finish_sale_form').submit();
     	}
     });
+    // SAS
+    $( "#finish_sale_button" ).keypress(function( event ) {
+		if ( event.which == 13 ) {
+			if (confirm('<?php echo $this->lang->line("sales_confirm_finish_sale"); ?>'))
+			{
+				$('#finish_sale_form').submit();
+			}
+		}
+	});
+	
+	//$( "#amount_tendered" ).keypress(function( event ) {
+		//if ( event.which == 13 ) {
+			//$( "#finish_sale_button" ).trigger( "click" );
+		//}
+	//});
+    // EAS
 
 	$("#suspend_sale_button").click(function()
 	{

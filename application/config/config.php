@@ -82,7 +82,10 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+// SAS - Because language has a en folder instead of english :( We may rename it or do like this.
+// $config['language']	= 'english';
+$config['language']	= 'en';
+// EAS - Because language has a en folder instead of english :( We may rename it or do like this.
 
 /*
 |--------------------------------------------------------------------------
